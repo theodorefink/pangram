@@ -1,0 +1,23 @@
+@import "./vars.css";
+
+.App {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+
+    color: black;
+} 
+
+/* App.module.css */
+:global(body) {
+  margin: 0;
+  padding: 0;
+}
+
+.appContainer {
+  margin: 20px; /* Space from the edges of the page */
+  padding: 20px; /* Padding inside the box */
+  outline: 3px solid #000; /* Outline around the content */
+  outline-offset: -10px; /* Adjust outline positioning */
+  min-height: 100vh; /* Ensure the container stretches to full height */
+}
