@@ -36,27 +36,36 @@ export const Hero = () => {
   const handleSolve = () => {
     console.log("Entered letters:", letters);
 
-    const requiredLetter = letters[0]; // Assuming first letter is mandatory
+    // const array = [1, 2, 3, 4, 5];
+    // const doubled = array.map(element => element * 2);
+
+    const lowerCaseLetters = letters.map(letter => letter.toLowerCase());
+    const requiredLetter = lowerCaseLetters[0]; // Assuming first letter is mandatory
     const otherLetters = letters.slice(1).join("");
 
     const filteredWords = wordList.filter(word =>
-      word.length > 3 && word.includes(requiredLetter) && [...word].every(char => letters.includes(char))
+      word.length > 3 && word.includes(requiredLetter) && [...word].every(char => lowerCaseLetters.includes(char))
     );
 
-    setValidWords(filteredWords);
-    console.log("Valid words:", filteredWords);
+    const upperCaseFiltered = filteredWords.map(word => word.toUpperCase());
+    setValidWords(upperCaseFiltered);
+    console.log("Valid words:", upperCaseFiltered);
   };
 
   const handlePangram = () => {
     console.log("Entered letters:", letters);
 
-    const requiredLetter = letters[0];
+    const lowerCaseLetters = letters.map(letter => letter.toLowerCase());
+    const requiredLetter = lowerCaseLetters[0];
     const filteredWords = wordList.filter(word =>
-      word.includes(requiredLetter) && new Set([...word]).size === 7
+        word.length > 3 && 
+        [...word].every(char => lowerCaseLetters.includes(char)) && 
+        lowerCaseLetters.every(letter => word.includes(letter)) 
     );
-
-    setValidWords(filteredWords);
-    console.log("Pangram words:", filteredWords);
+      
+    const upperCaseFiltered = filteredWords.map(word => word.toUpperCase());
+    setValidWords(upperCaseFiltered);
+    console.log("Pangram words:", upperCaseFiltered);
   };
 
   const handleReset = () => {
