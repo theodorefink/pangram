@@ -1,9 +1,9 @@
 @import "./vars.css";
 
 .App {
-    background-color: white;
-    width: 100%;
-    height: 100%;
+    background-color: #ffe852;
+    width: 100vw;
+    height: 100vw;
 
     color: black;
 } 
@@ -15,9 +15,9 @@
 }
 
 .appContainer {
-  margin: 20px; /* Space from the edges of the page */
-  padding: 20px; /* Padding inside the box */
-  outline: 3px solid #000; /* Outline around the content */
-  outline-offset: -10px; /* Adjust outline positioning */
-  min-height: 100vh; /* Ensure the container stretches to full height */
+  margin: 20px; 
+  padding: 20px; 
+  outline: 3px solid #000; 
+  outline-offset: -10px; 
+  min-height: 100vh;
 }

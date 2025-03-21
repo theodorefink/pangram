@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from './Hero.module.css';
 
 export const Hero = () => {
-  const [letters, setLetters] = useState(Array(7).fill('')); // 7 letter inputs
-  const [validWords, setValidWords] = useState([]); // Store valid words
-  const [wordList, setWordList] = useState([]); // Store all words from words.txt
-  const inputRefs = useRef([]); // Refs for input boxes
+  const [letters, setLetters] = useState(Array(7).fill('')); 
+  const [validWords, setValidWords] = useState([]); 
+  const [wordList, setWordList] = useState([]); 
+  const inputRefs = useRef([]); 
 
   useEffect(() => {
     fetch("/words.txt")
@@ -16,7 +16,7 @@ export const Hero = () => {
         return response.text();
       })
       .then(data => {
-        const words = data.split("\n").map(word => word.trim()); // Convert to array
+        const words = data.split("\n").map(word => word.trim()); 
         console.log("Loaded words:", words);
         setWordList(words);
       })
@@ -36,11 +36,9 @@ export const Hero = () => {
   const handleSolve = () => {
     console.log("Entered letters:", letters);
 
-    // const array = [1, 2, 3, 4, 5];
-    // const doubled = array.map(element => element * 2);
 
     const lowerCaseLetters = letters.map(letter => letter.toLowerCase());
-    const requiredLetter = lowerCaseLetters[0]; // Assuming first letter is mandatory
+    const requiredLetter = lowerCaseLetters[0]; 
     const otherLetters = letters.slice(1).join("");
 
     const filteredWords = wordList.filter(word =>
@@ -90,12 +88,13 @@ export const Hero = () => {
             onChange={(e) => handleInputChange(index, e.target.value)}
             maxLength={1}
             ref={(el) => (inputRefs.current[index] = el)}
-            className={styles.inputBox}
+            className={`${styles.inputBox} ${index === 0 ? styles.primaryInputBox : ''}`}
           />
         ))}
       </div>
-
-      <button onClick={handleSolve} className={styles.solveButton}>
+    
+     <div className={styles.buttons}>
+     <button onClick={handleSolve} className={styles.solveButton}>
         Solve
       </button>
 
@@ -106,16 +105,17 @@ export const Hero = () => {
       <button onClick={handleReset} className={styles.resetButton}>
         Reset
       </button>
+     </div>
 
-      {/* Display valid words */}
-      <div className={styles.results}>
-        <h2>Valid Words</h2>
-        <ul>
-          {validWords.map((word, index) => (
-            <li key={index}>{word}</li>
-          ))}
-        </ul>
-      </div>
+
+        <div className={styles.wordListContainer}>
+            <h3 className={styles.wordListTitle}>Valid Words</h3>
+            <div className={styles.wordList}>
+                {validWords.map((word, index) => (
+                    <li key={index} className={styles.word}>{word}</li>
+                ))}
+            </div>
+        </div>
     </section>
   );
 };
